@@ -1,0 +1,49 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    <h2>🛏️ Lista de Quartos</h2>
+    <a href="{% url 'cadastrar_quarto' %}" class="btn">➕ Novo Quarto</a>
+</div>
+
+<div class="card">
+    <table>
+        <thead>
+            <tr>
+                <th>Número</th>
+                <th>Tipo</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for quarto in quartos %}
+            <tr>
+                <td>{{ quarto.numero }}</td>
+                <td>{{ quarto.tipo }}</td>
+                <td>R$ {{ quarto.preco }}</td>
+                <td>
+                    {% if quarto.disponivel %}
+                        <span class="status success">Disponível</span>
+                    {% else %}
+                        <span class="status danger">Ocupado</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'editar_quarto' quarto.id %}" class="btn btn-secondary">✏️</a>
+                    <a href="{% url 'excluir_quarto' quarto.id %}" class="btn btn-danger">❌</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nenhum quarto cadastrado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    <h2>🦇 Cadastrar Novo Quarto 🛏️</h2>
+    <a href="{% url 'listar_quartos' %}" class="btn">🔙 Voltar</a>
+</div>
+
+<div class="card form-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn-success">💾 Salvar</button>
+    </form>
+</div>
+
+{% endblock %}

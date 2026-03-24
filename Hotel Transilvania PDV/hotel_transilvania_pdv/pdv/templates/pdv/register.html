@@ -1,0 +1,68 @@
+{% extends 'pdv/base.html' %}
+{% load static %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <h2>🏰 Criar Conta</h2>
+    <p>Registre-se no Sistema de Gerenciamento</p>
+
+    <!-- Exibe erros de validação -->
+    {% if form.errors %}
+        <div class="messages">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                    <div class="alert alert-error">
+                        <strong>❌ {{ field }}:</strong> {{ error }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <form method="post" action="{% url 'register' %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_username">👤 Nome de Usuário:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <small style="color: #ff6b6b;">{{ form.username.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_email">📧 Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <small style="color: #ff6b6b;">{{ form.email.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <div class="form-group">
+            <label for="id_password">🔐 Senha:</label>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <small style="color: #ff6b6b;">{{ form.password.errors }}</small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="id_password_confirm">🔐 Confirmar Senha:</label>
+            {{ form.password_confirm }}
+            {% if form.password_confirm.errors %}
+                <small style="color: #ff6b6b;">{{ form.password_confirm.errors }}</small>
+            {% endif %}
+        </div>
+        
+        <button type="submit" class="login-button">✅ Criar Conta</button>
+    </form>
+
+    <div class="register-link">
+        <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login aqui</a></p>
+    </div>
+</div>
+{% endblock %}

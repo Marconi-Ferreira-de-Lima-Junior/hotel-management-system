@@ -1,0 +1,19 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    <h2>💰 Cadastrar Receita</h2>
+</div>
+
+<div class="form-container card">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <a href="{% url 'listar_receitas' %}" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="card" style="text-align: center; max-width: 600px; margin: auto;">
+    
+    <div class="titulo">
+        <h2>❌ Excluir Reserva</h2>
+    </div>
+
+    <p>
+        Tem certeza que deseja excluir a reserva de 
+        <strong>{{ reserva.cliente }}</strong> 
+        no quarto 
+        <strong>{{ reserva.quarto }}</strong>?
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <a href="{% url 'reservas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+
+</div>
+
+{% endblock %}

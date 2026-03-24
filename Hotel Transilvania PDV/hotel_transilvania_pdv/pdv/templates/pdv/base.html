@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hotel Transilvânia - Sistema de Gerenciamento de PDV">
+    <title>Hotel Transilvânia PDV</title>
+
+    {% load static %}
+
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="{% static 'globals/style.css' %}">
+
+    <!-- BLOCO PARA CSS ESPECÍFICO DAS PÁGINAS -->
+    {% block extra_styles %}{% endblock %}
+</head>
+
+<body>
+
+<header>
+    <h1>🏰 Hotel Transilvânia</h1>
+
+    <nav>
+        <ul>
+            <li><a href="{% url 'dashboard' %}">📊 Início</a></li>
+            <li><a href="{% url 'clientes' %}">👥 Clientes</a></li>
+            <li><a href="{% url 'reservas' %}">🛏️ Reservas</a></li>
+            <li><a href="{% url 'listar_quartos' %}">🚪 Quartos</a></li>
+            <li><a href="{% url 'listar_despesas' %}">💸 Despesas</a></li>
+            <li><a href="{% url 'listar_receitas' %}">💰 Receitas</a></li>
+            <li><a href="{% url 'logout' %}">🚪 Sair</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <!-- Mensagens do Django -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- CONTEÚDO DAS PÁGINAS -->
+    {% block content %}{% endblock %}
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Hotel Transilvânia PDV.</p>
+</footer>
+
+<!-- BLOCO PARA SCRIPTS (JS) -->
+{% block scripts %}{% endblock %}
+
+</body>
+</html>

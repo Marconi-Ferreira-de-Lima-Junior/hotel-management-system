@@ -1,0 +1,202 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    <h2>🏰 Bem-vindo ao Hotel Transilvânia PDV</h2>
+</div>
+
+<p class="subtitulo">
+    Sistema profissional de gerenciamento de hotéis | Desenvolvido com Django
+</p>
+
+<!-- ==================== CARDS PRINCIPAIS ==================== -->
+
+<div class="cards-grid">
+
+    <!-- Clientes -->
+    <div class="card">
+        <div class="card-title">👥 Total de Clientes</div>
+        <div class="card-number">
+            {{ total_clientes }}
+        </div>
+        <p class="card-text">Clientes registrados no sistema</p>
+        <a href="{% url 'clientes' %}" class="btn">Ver Clientes</a>
+    </div>
+
+    <!-- Reservas -->
+    <div class="card">
+        <div class="card-title">🛏️ Total de Reservas</div>
+        <div class="card-number">
+            {{ total_reserva }}
+        </div>
+        <p class="card-text">Reservas ativas no sistema</p>
+        <a href="{% url 'reservas' %}" class="btn">Ver Reservas</a>
+    </div>
+
+    <!-- Quartos -->
+    <div class="card">
+        <div class="card-title">🚪 Quartos Disponíveis</div>
+        <div class="card-number success">
+            {{ quartos_disponiveis }}
+        </div>
+        <p class="card-text">Quartos prontos para reserva</p>
+        <a href="{% url 'listar_quartos' %}" class="btn btn-success">Ver Quartos</a>
+    </div>
+
+</div>
+
+<!-- ==================== FINANCEIRO ==================== -->
+
+<div class="titulo">
+    <h2>💰 Financeiro</h2>
+</div>
+
+<div class="cards-grid">
+
+    <!-- Receita -->
+    <div class="card">
+        <div class="card-title">💰 Total de Receitas</div>
+        <div class="card-number success">
+            R$ {{ total_receitas }}
+        </div>
+        <p class="card-text">Entradas registradas</p>
+    </div>
+
+    <!-- Despesa -->
+    <div class="card">
+        <div class="card-title">💸 Total de Despesas</div>
+        <div class="card-number" style="color: #c0392b;">
+            R$ {{ total_despesas }}
+        </div>
+        <p class="card-text">Saídas registradas</p>
+    </div>
+
+    <!-- Saldo -->
+    <div class="card">
+        <div class="card-title">🧮 Saldo Total</div>
+
+        {% if saldo >= 0 %}
+            <div class="card-number success">
+                R$ {{ saldo }}
+            </div>
+            <p class="status success">Lucro</p>
+        {% else %}
+            <div class="card-number" style="color: #c0392b;">
+                R$ {{ saldo }}
+            </div>
+            <p class="status danger">Prejuízo</p>
+        {% endif %}
+
+        <p class="card-text">Receitas - Despesas</p>
+    </div>
+
+</div>
+
+<!-- ==================== GRÁFICO ==================== -->
+
+<div class="titulo">
+    <h2>📊 Visão Financeira</h2>
+</div>
+
+<div class="card">
+    <canvas id="graficoFinanceiro"></canvas>
+</div>
+
+<!-- ==================== AÇÕES RÁPIDAS ==================== -->
+
+<div class="titulo">
+    <h2>⚡ Ações Rápidas</h2>
+</div>
+
+<div class="cards-grid">
+
+    <div class="card">
+        <div class="card-title">➕ Novo Cliente</div>
+        <p class="card-text">Registre um novo cliente no sistema</p>
+        <a href="{% url 'cadastrar_cliente' %}" class="btn">Cadastrar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">➕ Nova Reserva</div>
+        <p class="card-text">Crie uma nova reserva para um cliente</p>
+        <a href="{% url 'criar_reserva' %}" class="btn">Reservar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">➕ Novo Quarto</div>
+        <p class="card-text">Adicione um novo quarto ao hotel</p>
+        <a href="{% url 'cadastrar_quarto' %}" class="btn">Adicionar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">💸 Registrar Despesa</div>
+        <p class="card-text">Registre uma despesa operacional</p>
+        <a href="{% url 'cadastrar_despesas' %}" class="btn btn-secondary">Registrar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">💰 Registrar Receita</div>
+        <p class="card-text">Registre uma receita ou pagamento</p>
+        <a href="{% url 'cadastrar_receitas' %}" class="btn btn-success">Registrar</a>
+    </div>
+
+    <div class="card">
+        <div class="card-title">📊 Relatórios</div>
+        <p class="card-text">Visualize relatórios do hotel</p>
+        <a href="{% url 'relatorios' %}" class="btn">Ver Relatórios</a>
+    </div>
+
+</div>
+
+<!-- ==================== SOBRE ==================== -->
+
+<div class="titulo">
+    <h2>ℹ️ Sobre o Sistema</h2>
+</div>
+
+<div class="card">
+    <p>
+        <strong>Hotel Transilvânia PDV</strong> é um sistema completo de gerenciamento hoteleiro desenvolvido com Python e Django, focado em controle operacional, financeiro e experiência do usuário.
+        A aplicação permite gerenciar clientes, reservas, quartos e fluxo financeiro de forma centralizada, oferecendo uma visão clara e em tempo real do funcionamento do hotel.
+    </p>
+
+    <p style="margin-top: 1rem;">
+        <strong>🚀 Funcionalidades principais:</strong>
+    </p>
+
+    <ul style="text-align: left; margin-top: 0.5rem; color: #b8b8b8;">
+        <li>✅ <strong>Gestão completa de clientes (cadastro, edição e histórico)</strong></li>
+        <li>✅ <strong>Sistema de reservas com validação de datas e controle de conflitos</strong></li>
+        <li>✅ <strong>Controle de quartos com status de disponibilidade</strong></li>
+        <li>✅ <strong>Registro e acompanhamento de receitas e despesas</strong></li>
+        <li>✅ <strong>Dashboard com métricas e indicadores em tempo real</strong></li>
+        <li>✅ <strong>Sistema de autenticação e controle de acesso</strong></li>
+    </ul>
+</div>
+
+{% endblock %}
+
+<!-- ==================== SCRIPTS ==================== -->
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const ctx = document.getElementById('graficoFinanceiro');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: {{ labels|safe }},
+            datasets: [{
+                label: 'Financeiro (R$)',
+                data: {{ valores|safe }},
+                borderWidth: 2
+            }]
+        }
+    });
+});
+</script>
+{% endblock %}

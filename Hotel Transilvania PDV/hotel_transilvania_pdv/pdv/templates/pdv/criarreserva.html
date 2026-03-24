@@ -1,0 +1,17 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<form method="post" class="card form-container">
+    <div class="titulo">
+        <h2>🦇 Criar Nova Reserva 🗝️</h2>
+        <a href="{% url 'reservas' %}" class="btn">🔙 Voltar</a>
+    </div>
+
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn">💾 Salvar</button>
+</form>
+
+{% endblock %}

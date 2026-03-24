@@ -1,0 +1,96 @@
+{% extends 'pdv/base.html' %}
+
+{% load static %}
+{% block extra_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'globals/style.css' %}">
+<!-- Adicionando um estilo específico para a tela de clientes com as cores do hotel transilvania -->
+<style>
+    body {
+        background-color: #1a1a1a; /* Fundo escuro */
+        color: #e0e0e0; /* Texto claro */
+        font-family: 'Creepster', cursive; /* Fonte temática */
+    }
+
+    .titulo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .titulo h2 {
+        font-size: 2.5rem;
+        color: #8a2be2; /* Roxo */
+        text-shadow: 2px 2px 4px #000000;
+    }
+
+    .btn {
+        background-color: #8a2be2; /* Roxo */
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #6a1b9a; /* Roxo mais escuro */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #2c2c2c; /* Fundo escuro para a tabela */
+        border: 2px solid #8a2be2; /* Borda roxa */
+    }
+
+    th, td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #8a2be2; /* Linhas roxas */
+    }
+
+    th {
+        background-color: #8a2be2; /* Cabeçalho roxo */
+        color: #ffffff;
+        font-size: 1.2rem;
+    }
+
+    tr:hover {
+        background-color: #3c3c3c; /* Efeito hover escuro */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="titulo">
+    <h2>📜 Livro de Registros de Hóspedes 🦇</h2>
+    <a href="{% url 'cadastrar_cliente' %}" class="btn">➕ Adicionar Novo Hóspede</a>
+    {% comment %} <a href="{%url 'editar_cliente' %}" class="btn">Editar Hóspede</a>
+    <a href="{% url 'excluir_cliente' %}" class="btn">Excluir Cliente</a> {% endcomment %}
+</div>
+<table>
+    <tr>
+        <th>Nome do Hóspede</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Ações</th>
+    </tr>
+    {% for cliente in clientes %}
+    <tr>
+        <td>{{ cliente.nome }}</td>
+        <td>{{ cliente.telefone }}</td>
+        <td>{{ cliente.email }}</td>
+        <td class="acoes">
+            <a href="{% url 'editar_cliente' cliente.id %}">✏️ Editar</a>
+            <a href="{% url 'excluir_cliente' cliente.id %}">❌ Excluir</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="4">Nenhum cliente cadastrado.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'pdv/base.html' %}
+
+{% block content %}
+
+<div class="titulo">
+    <h2>❌ Excluir Receita</h2>
+</div>
+
+<div class="card">
+    <p>Tem certeza que deseja excluir <strong>{{ receita.descricao }}</strong>?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir</button>
+        <a href="{% url 'listar_receitas' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}

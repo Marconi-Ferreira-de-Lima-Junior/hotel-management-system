@@ -1,0 +1,515 @@
+/* HOTEL TRANSILVANIA PDV */
+
+:root {
+    /* Paleta de cores temática do Hotel Transilvânia */
+    --primary-color: #4a1a40;          /* Roxo escuro vampiresco */
+    --primary-light: #6d2f63;          /* Roxo mais claro */
+    --secondary-color: #d4af37;        /* Ouro medieval */
+    --accent-dark: #8b4513;            /* Marrom vampiresco */
+    --background-dark: #1a1a1a;        /* Preto profundo */
+    --background-light: #2a1a3a;       /* Preto roxado */
+    --text-primary: #e8e8e8;           /* Texto claro */
+    --text-secondary: #b8b8b8;         /* Texto secundário */
+    --danger-color: #c0392b;           /* Vermelho para alertas */
+    --success-color: #27ae60;          /* Verde para sucesso */
+    --border-color: #3d2d4d;           /* Bordas roxas */
+    
+    /* Fonts */
+    --font-heading: 'Creepster', cursive, sans-serif;
+    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==================== ESTILOS GLOBAIS ==================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ==================== HEADER E NAVEGAÇÃO ==================== */
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--text-primary);
+    padding: 0px;
+    position: fixed;
+    height: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+header h1 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+    text-align: center;
+    word-break: break-word;
+}
+
+nav {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+}
+
+nav li {
+    position: relative;
+}
+
+nav a {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 12px 20px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-right: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+nav li:last-child a {
+    border-right: none;
+}
+
+nav a:hover {
+    background-color: rgba(212, 175, 55, 0.15);
+    color: var(--secondary-color);
+    padding-left: 25px;
+}
+
+nav a:active {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* ==================== MAIN CONTENT ==================== */
+
+main {
+    margin-top: 100px;
+    padding: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    min-height: calc(100vh - 100px);
+}
+
+/* ==================== TÍTULOS ==================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+    margin-top: 1.5rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+.titulo {
+    background-color: rgba(74, 26, 64, 0.3);
+    padding: 1.5rem;
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 10px rgba(212, 175, 55, 0.1);
+}
+
+.titulo h2 {
+    margin: 0;
+    color: var(--secondary-color);
+    text-align: left;
+}
+
+/* ==================== BOTÕES ==================== */
+
+.btn, button, input[type="submit"] {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--font-body);
+}
+
+.btn:hover, button:hover, input[type="submit"]:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--accent-dark);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-color);
+    color: var(--accent-dark);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #e74c3c;
+    box-shadow: 0 5px 15px rgba(192, 57, 43, 0.3);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: #229954;
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.3);
+}
+
+/* ==================== FORMULÁRIOS ==================== */
+
+form {
+    background-color: rgba(42, 26, 58, 0.5);
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="datetime-local"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    background-color: rgba(58, 38, 78, 0.6);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    background-color: rgba(58, 38, 78, 0.9);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* ==================== TABELAS ==================== */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    background-color: rgba(42, 26, 58, 0.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--secondary-color);
+}
+
+th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 3px solid var(--secondary-color);
+}
+
+td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(58, 38, 78, 0.3);
+}
+
+/* ==================== CARDS E CONTAINERS ==================== */
+
+.card {
+    background: linear-gradient(135deg, rgba(74, 26, 64, 0.3), rgba(109, 47, 99, 0.2));
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
+    transform: translateY(-3px);
+}
+
+.card-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+.card-text {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* ==================== MENSAGENS ==================== */
+
+.messages {
+    margin-bottom: 2rem;
+}
+
+.alert {
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+    display: flex;
+    align-items: center;
+}
+
+.alert-success {
+    background-color: rgba(39, 174, 96, 0.1);
+    border-left-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-error {
+    background-color: rgba(192, 57, 43, 0.1);
+    border-left-color: var(--danger-color);
+    color: var(--danger-color);
+}
+
+.alert-warning {
+    background-color: rgba(212, 175, 55, 0.1);
+    border-left-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.alert-info {
+    background-color: rgba(52, 152, 219, 0.1);
+    border-left-color: #3498db;
+    color: #3498db;
+}
+
+/* ==================== RODAPÉ ==================== */
+
+footer {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--text-primary);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 3px solid var(--secondary-color);
+    box-shadow: 0 -4px 15px rgba(212, 175, 55, 0.1);
+}
+
+footer p {
+    margin: 0;
+    color: var(--text-secondary);
+}
+
+/* ==================== RESPONSIVIDADE ==================== */
+
+@media (max-width: 768px) {
+    main {
+        margin-top: 120px;
+        padding: 1rem;
+    }
+
+    nav {
+        flex-direction: column;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav a {
+        border-right: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    nav li:last-child a {
+        border-bottom: none;
+    }
+
+    header {
+        padding: 1rem;
+    }
+
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1.1rem; }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.7rem;
+    }
+
+    form {
+        padding: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+.subtitulo {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+.card-number {
+    font-size: 3rem;
+    text-align: center;
+    margin: 1rem 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+.card-number.success {
+    color: var(--success-color);
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+
+.actions-center {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.total {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 1rem;
+    color: var(--secondary-color);
+}
+
+.saldo {
+    text-align: center;
+    font-size: 1.5rem;
+    color: var(--success-color);
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.status.success {
+    background-color: rgba(39, 174, 96, 0.2);
+    color: var(--success-color);
+}
+
+.status.danger {
+    background-color: rgba(192, 57, 43, 0.2);
+    color: var(--danger-color);
+}
