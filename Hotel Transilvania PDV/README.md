@@ -219,9 +219,6 @@ python manage.py test
 - **Pillow** - Processamento de imagens
 - **gunicorn** - Servidor WSGI para produção
 
-## 📄 Licença
-
-Projeto desenvolvido para fins educacionais na Fuctura.
 
 ## ✉️ Suporte
 

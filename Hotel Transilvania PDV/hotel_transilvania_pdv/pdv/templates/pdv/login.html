@@ -2,20 +2,22 @@
 {% load static %}
 
 {% block extra_styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+<link rel="stylesheet" href="{% static 'login/login.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="login-container">
-    <h2>🏰 Hotel Transilvânia</h2>
-    <p>Sistema de Gerenciamento de PDV</p>
 
-    <!-- Exibe mensagens de erro -->
+    <div class="logo">🧛‍♂️</div>
+
+    <h2>🏰 Hotel Transilvânia</h2>
+    <p>Gerencie seu hotel com eficiência e controle total</p>
+
     {% if messages %}
         <div class="messages">
             {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    <strong>❌ Erro:</strong> {{ message }}
+                <div>
+                    ⚠️ {{ message }}
                 </div>
             {% endfor %}
         </div>
@@ -24,37 +26,70 @@
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
         
+        <!-- USUÁRIO -->
         <div class="form-group">
-            <label for="username">👤 Usuário:</label>
+            <label>👤 Usuário</label>
             <input 
                 type="text" 
-                id="username" 
                 name="username" 
                 required 
-                class="input-field" 
-                placeholder="Digite seu nome de usuário"
+                placeholder="Digite seu usuário"
                 autocomplete="username"
             >
         </div>
         
+        <!-- SENHA -->
         <div class="form-group">
-            <label for="password">🔐 Senha:</label>
-            <input 
-                type="password" 
-                id="password" 
-                name="password" 
-                required 
-                class="input-field" 
-                placeholder="Digite sua senha"
-                autocomplete="current-password"
-            >
+            <label>🔐 Senha</label>
+
+            <div class="password-wrapper">
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password"
+                    required 
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                >
+                <span id="togglePassword">👁️</span>
+            </div>
         </div>
-        
-        <button type="submit" class="login-button">🔓 Acessar Sistema</button>
+
+        <!-- LEMBRAR -->
+        <div class="remember">
+            <input type="checkbox" name="remember">
+            <label>Lembrar-me</label>
+        </div>
+
+        <button type="submit" class="login-button" id="loginBtn">
+            🔓 Acessar Sistema
+        </button>
     </form>
 
     <div class="register-link">
-        <p>Ainda não tem uma conta? <a href="{% url 'register' %}">Registre-se aqui</a></p>
+        <p>Não tem conta? <a href="{% url 'register' %}">Criar agora</a></p>
     </div>
+
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // MOSTRAR/OCULTAR SENHA
+    const toggle = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    toggle.addEventListener('click', () => {
+        const type = password.type === 'password' ? 'text' : 'password';
+        password.type = type;
+        toggle.textContent = type === 'password' ? '👁️' : '🙈';
+    });
+
+    // LOADING NO BOTÃO
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('loginBtn');
+        btn.textContent = '⏳ Entrando...';
+        btn.disabled = true;
+    });
+</script>
 {% endblock %}

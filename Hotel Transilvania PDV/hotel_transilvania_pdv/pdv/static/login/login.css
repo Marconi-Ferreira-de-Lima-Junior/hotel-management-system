@@ -1,7 +1,7 @@
-/* ==================== LOGIN PAGE STYLES ==================== */
-
+/* ==================== IMPORTS ==================== */
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Segoe+UI:wght@400;600&display=swap');
 
+/* ==================== VARIÁVEIS ==================== */
 :root {
     --primary-color: #4a1a40;
     --primary-light: #6d2f63;
@@ -9,96 +9,91 @@
     --background-dark: #1a1a1a;
     --background-light: #2a1a3a;
     --text-primary: #e8e8e8;
-    --font-heading: 'Creepster', cursive, sans-serif;
-    --font-body: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    --danger: #e74c3c;
+    --success: #2ecc71;
+    --warning: #f1c40f;
+
+    --font-heading: 'Creepster', cursive;
+    --font-body: 'Segoe UI', sans-serif;
 }
 
+/* ==================== RESET ==================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-}
-
+/* ==================== BODY ==================== */
 body {
-    background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
-    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--background-dark), var(--background-light));
     font-family: var(--font-body);
+    color: var(--text-primary);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 1rem;
 }
 
-/* ==================== LOGIN CONTAINER ==================== */
-
+/* ==================== CONTAINER ==================== */
 .login-container {
-    background: linear-gradient(135deg, rgba(74, 26, 64, 0.8) 0%, rgba(42, 26, 58, 0.9) 100%);
-    padding: 3rem 2rem;
-    border-radius: 12px;
-    border: 2px solid #d4af37;
-    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3),
-                0 0 60px rgba(212, 175, 55, 0.1),
-                inset 0 0 20px rgba(212, 175, 55, 0.05);
-    text-align: center;
     width: 100%;
     max-width: 420px;
-    animation: slideIn 0.5s ease-out;
+    padding: 2.5rem;
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(212, 175, 55, 0.3);
+
+    box-shadow:
+        0 0 25px rgba(212, 175, 55, 0.2),
+        inset 0 0 10px rgba(212, 175, 55, 0.05);
+
+    text-align: center;
+    animation: fadeIn 0.5s ease;
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* ==================== TÍTULO E DESCRIÇÃO ==================== */
-
+/* ==================== TITULO ==================== */
 .login-container h2 {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2.3rem;
     color: var(--secondary-color);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .login-container p {
-    color: #b8b8b8;
     margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+    color: #aaa;
 }
 
 /* ==================== MENSAGENS ==================== */
-
 .messages {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-.messages div {
-    padding: 0.75rem 1rem;
-    background-color: rgba(192, 57, 43, 0.15);
-    border-left: 4px solid #c0392b;
-    border-radius: 5px;
-    color: #ff6b6b;
-    font-size: 0.95rem;
-    animation: slideIn 0.3s ease-out;
+.alert {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
 }
 
-/* ==================== FORMULÁRIO ==================== */
+.alert-error {
+    background: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--danger);
+}
 
+/* ==================== FORM ==================== */
 form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.2rem;
 }
 
 .form-group {
@@ -106,128 +101,108 @@ form {
 }
 
 label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
     color: var(--secondary-color);
-    font-size: 0.95rem;
+    margin-bottom: 5px;
+    display: block;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="email"] {
+/* ==================== INPUT ==================== */
+input {
     width: 100%;
-    padding: 12px 15px;
-    border: 2px solid rgba(212, 175, 55, 0.3);
+    padding: 10px;
     border-radius: 6px;
-    background-color: rgba(58, 38, 78, 0.6);
-    color: var(--text-primary);
-    font-family: var(--font-body);
-    font-size: 1rem;
-    transition: all 0.3s ease;
+
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid #555;
+    color: white;
+
+    transition: 0.3s;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus,
-input[type="email"]:focus {
-    outline: none;
+input:focus {
     border-color: var(--secondary-color);
-    background-color: rgba(58, 38, 78, 0.9);
-    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    outline: none;
 }
 
-input::placeholder {
-    color: #888;
+/* ==================== PASSWORD TOGGLE ==================== */
+.password-wrapper {
+    position: relative;
 }
 
-/* ==================== BOTÃO LOGIN ==================== */
-
-.login-button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: var(--text-primary);
-    border: 2px solid var(--secondary-color);
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 1rem;
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-family: var(--font-body);
+    font-size: 1.2rem;
+}
+
+/* ==================== PASSWORD STRENGTH ==================== */
+.password-strength {
+    height: 6px;
+    border-radius: 5px;
+    margin-top: 5px;
+    background: #333;
+    overflow: hidden;
+}
+
+.password-strength span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    transition: 0.3s;
+}
+
+.weak { background: var(--danger); width: 30%; }
+.medium { background: var(--warning); width: 60%; }
+.strong { background: var(--success); width: 100%; }
+
+/* ==================== BUTTON ==================== */
+.login-button {
+    padding: 12px;
+    border-radius: 6px;
+    border: none;
+
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.3s;
 }
 
 .login-button:hover {
     background: var(--secondary-color);
-    color: var(--primary-color);
+    color: black;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
 }
 
-.login-button:active {
-    transform: translateY(0);
-}
-
-/* ==================== LINK DE REGISTRO ==================== */
-
+/* ==================== LINK ==================== */
 .register-link {
     margin-top: 1rem;
-    color: #b8b8b8;
     font-size: 0.9rem;
 }
 
 .register-link a {
     color: var(--secondary-color);
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
 }
 
 .register-link a:hover {
-    color: #ffd700;
     text-decoration: underline;
 }
 
-/* ==================== RESPONSIVIDADE ==================== */
-
+/* ==================== RESPONSIVO ==================== */
 @media (max-width: 480px) {
-    body {
-        padding: 0.5rem;
-    }
-
     .login-container {
-        padding: 2rem 1.5rem;
-        border-radius: 8px;
+        padding: 1.8rem;
     }
 
     .login-container h2 {
-        font-size: 2rem;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    input[type="email"] {
-        padding: 10px 12px;
-        font-size: 16px;
-    }
-
-    .login-button {
-        padding: 10px;
-        font-size: 0.95rem;
-    }
-}
-
-@media (max-width: 320px) {
-    .login-container {
-        padding: 1.5rem 1rem;
-    }
-
-    .login-container h2 {
-        font-size: 1.5rem;
-    }
-
-    .login-container p {
-        font-size: 0.85rem;
+        font-size: 1.8rem;
     }
 }

@@ -2,67 +2,138 @@
 {% load static %}
 
 {% block extra_styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'login/login.css' %}">
+<link rel="stylesheet" href="{% static 'login/login.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="login-container">
-    <h2>🏰 Criar Conta</h2>
-    <p>Registre-se no Sistema de Gerenciamento</p>
 
-    <!-- Exibe erros de validação -->
+    <div class="logo">🧛‍♂️</div>
+
+    <h2>🏰 Criar Conta</h2>
+    <p>Crie sua conta e comece a gerenciar seu hotel</p>
+
+    <!-- ERROS -->
     {% if form.errors %}
         <div class="messages">
             {% for field, errors in form.errors.items %}
                 {% for error in errors %}
-                    <div class="alert alert-error">
-                        <strong>❌ {{ field }}:</strong> {{ error }}
+                    <div>
+                        ⚠️ {{ error }}
                     </div>
                 {% endfor %}
             {% endfor %}
         </div>
     {% endif %}
 
-    <form method="post" action="{% url 'register' %}">
+    <form method="post">
         {% csrf_token %}
         
+        <!-- USERNAME -->
         <div class="form-group">
-            <label for="id_username">👤 Nome de Usuário:</label>
+            <label>👤 Usuário</label>
             {{ form.username }}
-            {% if form.username.errors %}
-                <small style="color: #ff6b6b;">{{ form.username.errors }}</small>
-            {% endif %}
         </div>
         
+        <!-- EMAIL -->
         <div class="form-group">
-            <label for="id_email">📧 Email:</label>
+            <label>📧 Email</label>
             {{ form.email }}
-            {% if form.email.errors %}
-                <small style="color: #ff6b6b;">{{ form.email.errors }}</small>
-            {% endif %}
         </div>
         
+        <!-- SENHA -->
         <div class="form-group">
-            <label for="id_password">🔐 Senha:</label>
-            {{ form.password }}
-            {% if form.password.errors %}
-                <small style="color: #ff6b6b;">{{ form.password.errors }}</small>
-            {% endif %}
+            <label>🔐 Senha</label>
+
+            <div class="password-wrapper">
+                {{ form.password }}
+                <span class="togglePassword">👁️</span>
+            </div>
+
+            <!-- BARRA DE FORÇA -->
+            <div class="password-strength">
+                <span id="strength-bar"></span>
+            </div>
         </div>
 
+        <!-- CONFIRMAR SENHA -->
         <div class="form-group">
-            <label for="id_password_confirm">🔐 Confirmar Senha:</label>
-            {{ form.password_confirm }}
-            {% if form.password_confirm.errors %}
-                <small style="color: #ff6b6b;">{{ form.password_confirm.errors }}</small>
-            {% endif %}
+            <label>🔐 Confirmar Senha</label>
+
+            <div class="password-wrapper">
+                {{ form.password_confirm }}
+                <span class="togglePassword">👁️</span>
+            </div>
         </div>
-        
-        <button type="submit" class="login-button">✅ Criar Conta</button>
+
+        <button type="submit" class="login-button" id="registerBtn">
+            ✅ Criar Conta
+        </button>
     </form>
 
     <div class="register-link">
-        <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login aqui</a></p>
+        <p>Já tem conta? <a href="{% url 'login' %}">Entrar</a></p>
     </div>
+
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+
+    // ============================
+    // MOSTRAR / OCULTAR SENHA
+    // ============================
+    const toggles = document.querySelectorAll('.togglePassword');
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const input = toggle.previousElementSibling;
+
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+
+            toggle.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    });
+
+
+    // ============================
+    // FORÇA DA SENHA
+    // ============================
+    const passwordInput = document.getElementById('id_password');
+    const strengthBar = document.getElementById('strength-bar');
+
+    passwordInput.addEventListener('keyup', () => {
+        const password = passwordInput.value;
+
+        let strength = 0;
+
+        if (password.length > 5) strength++;
+        if (/[A-Z]/.test(password)) strength++;
+        if (/[0-9]/.test(password)) strength++;
+        if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+        strengthBar.className = '';
+
+        if (strength <= 1) {
+            strengthBar.classList.add('weak');
+        } else if (strength <= 3) {
+            strengthBar.classList.add('medium');
+        } else {
+            strengthBar.classList.add('strong');
+        }
+    });
+
+
+    // ============================
+    // LOADING BOTÃO
+    // ============================
+    document.querySelector('form').addEventListener('submit', function() {
+        const btn = document.getElementById('registerBtn');
+        btn.textContent = '⏳ Criando conta...';
+        btn.disabled = true;
+    });
+
+</script>
 {% endblock %}
