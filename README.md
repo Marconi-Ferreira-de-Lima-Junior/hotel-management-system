@@ -95,8 +95,8 @@ python manage.py runserver
 ---
 
 ## 📸 Screenshots
-![Dashboard](pdv/images/dashboard.png)
-![Login](pdv/images/login.png)
+![Dashboard](images/dashboard.png)
+![Login](images/login.png)
 
 
 ---
